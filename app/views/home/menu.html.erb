@@ -1,0 +1,152 @@
+<!-- スマホ、タブレットのみ -->
+<div class="main_posts_index">
+  <div class="container">
+    <% @posts.each do |post|%>
+      <div class="post">
+      <%= link_to(post_path(post.id), class:"no-underline") do%>
+        <div class="post_top">
+          <div class="userinfo">
+            <% if User.find_by(id: post.user_id).image?%>
+              <img src=<%= User.find_by(id: post.user_id).image %> class = "icon_img">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon_img" alt="ユーザーアイコン" %>
+            <% end %>
+            <div class="username">
+              <%= User.find_by(id: post.user_id).username%>
+            </div>
+          </div>
+          <div class="post_body">
+            <%= simple_format post.body%>
+          </div>
+          <div class="post_img">
+            <%if Post.find(post.id).img?%>
+              <img src=<%= Post.find(post.id).img %> class="img">
+            <%end%>
+          </div>
+        </div>
+      <%end%>
+      <div class="post_bottom">
+        <% case post.category %>
+        <% when "食べ物"%>
+          <div class="category_each">
+            <i class="fas fa-apple-alt"></i>
+            <%= post.category%>
+          </div>
+        <% when "洋服"%>
+          <div class="category_each">
+            <i class="fas fa-tshirt"></i>
+            <%= post.category%>
+          </div>
+        <% when "美容"%>
+          <div class="category_each">
+            <i class="fas fa-cut"></i>
+            <%= post.category%>
+          </div>
+        <% when "医療"%>
+          <div class="category_each">
+            <i class="fas fa-hand-holding-medical"></i>
+            <%= post.category%>
+          </div>
+        <% when "勉強"%>
+          <div class="category_each">
+            <i class="fas fa-user-graduate"></i>
+            <%= post.category%>
+          </div>
+        <% when "スポーツ"%>
+          <div class="category_each">
+            <i class="fas fa-running"></i>
+            <%= post.category%>
+          </div>
+        <% when "ゲーム"%>
+          <div class="category_each">
+            <i class="fab fa-playstation"></i>
+            <%= post.category%>
+          </div>
+        <% when "保険"%>
+          <div class="category_each">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <%= post.category%>
+          </div>
+        <% when "お金"%>
+          <div class="category_each">
+            <i class="fas fa-comment-dollar"></i>
+            <%= post.category%>
+          </div>
+        <% when "その他"%>
+          <div class="category_each">
+            <i class="fab fa-accusoft"></i>
+            <%= post.category%>
+          </div>
+        <% end %>
+        <div class="good">
+          <% if Like.find_by(user_id: current_user.id, post_id: post.id)%>
+            <%= link_to({controller: "likes", action: "destroy", post_id: post.id}, method: :post, :class=>"no-underline") do%>
+              <i class="fab fa-angellist my-fab"></i>
+            <%end%>
+          <%else%>
+            <%= link_to({controller: "likes", action: "create", post_id: post.id}, method: :post, :class => "no-underline") do%>
+            <i class="fab fa-angellist "></i>
+            <%end%>
+          <%end%>
+          <%= Like.where(post_id: post.id).count%>
+        </div>
+        <div class="comment">
+          <%= link_to({controller:"comments",action: :new,post_id: post.id, method: :get, :class=>"no-underline"}) do %>
+          <i class="far fa-comment-dots"></i>
+          <% end %>
+          <%= Comment.where(post_id: post.id).count%>
+        </div>
+        <div class="time">
+          <%= post.created_at%>
+        </div>
+      </div>
+      </div>
+    <%end%>
+  </div>
+  <div class="menu_select">
+    <ul>
+      <li>
+        <%= link_to destroy_user_session_path, method: :delete, class:"no-underline" do%>
+          <h4 class="sign_out">
+            ログアウト
+          </h4>
+        <%end%>
+      </li>
+      <li>
+        <%= link_to new_post_path,class:"no-underline"  do%>
+          <h4 class="new_post">
+            新規投稿
+          </h4>
+        <%end%>
+      </li>
+      <li>
+        <%= link_to posts_path,class:"no-underline" do%>
+          <h4 class="postall">
+            投稿一覧
+          </h4>
+        <%end%>
+      </li>
+      <li>
+        <%= link_to "/users/index",class:"no-underline" do%>
+          <h4 class="userall">
+            ユーザ一覧
+          </h4>
+        <%end%>
+      </li>
+      <li>
+        <%= link_to "/home/category", class:"no-underline" do %>
+          <h4>
+            カテゴリー
+          </h4>
+        <%end%>
+      </li>
+      <li>
+        <%= link_to "/home/userlank", class:"no-underline" do %>
+          <h4>
+            ユーザーランキング
+          </h4>
+      <%end%>
+      </li>
+    </ul>
+  </div>
+</div>

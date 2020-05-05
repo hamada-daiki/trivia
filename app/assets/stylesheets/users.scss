@@ -1,0 +1,665 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+//follow-btn
+.btn-danger,.btn-primary{
+  margin-top: 20px;
+}
+
+//user_edit
+.Update_bottom{
+  padding: 5px 10px;
+  width: 100px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 0 0 rgba(0,0,0,0.5);
+  color: black;
+  transition: 0.3s;
+}//Update_bottom
+.Update_bottom:hover{
+  transform: scale(1.2);
+  background-color: rgba(0,0,0,0.9);
+  color: white;
+}
+
+//スマホ、タブレット向け
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+//users.index.html.erb
+.main_users{
+  background-color: rgba(0,0,0,0.7);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  font-size: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+  z-index: 0;
+
+  .sidemenu{
+    width: 25%;
+    padding-left: 10px;
+    font-size: 1.2rem;
+    display: flex;
+    color: white;
+    @include pc{
+      display: none;
+    }
+    .profile_usericon{
+      .icon_image {
+        width: 100px;
+        height: 100px;
+        border-radius: 100px;
+        object-fit: cover;
+      }//icon_image
+    }//profile_usericon
+    .menu_list{
+      width: 70%;
+      overflow: hidden;
+      word-wrap: break-word;
+      .no-underline{
+        text-decoration:none !important;
+        color: white;
+      }//no-underline
+      h3{
+        font-weight: bold;
+      }//h3
+      ul{
+        list-style: none;
+        li{
+          padding: 5px;
+          text-align: center;
+          transform: 0.3s;
+        }//li
+        li:hover{
+          background-color: rgba(0,0,0,1);
+          border-radius: 10px;
+          color: #67a8dd;
+        }//li:hover
+        .no-underline:hover{
+          color: #67a8dd;
+        }
+      }//ul
+    }//menu_list
+  }//sidemenu
+  .container{
+    width: 50%;
+    height: 80vh;
+    position: absolute;
+    top: 140px;
+    left: 25%;
+    font-size: 1.6rem;
+    text-align: left;
+    @include pc{
+      position: absolute;
+      top: 160px;
+      left: 25px;
+      width: 100%;
+      height: 85vh;
+    }
+    @include tab{
+      position: absolute;
+      top: 140px;
+      left: 0;
+      width: 100%;
+      height: 85vh;
+    };
+    @include sp{
+      position: absolute;
+      top: 140px;
+      left: 0;
+      width: 100%;
+      height: 80vh;
+    };
+    .title{
+      width: 100%;
+      height: 10%;
+      padding-top: 10px;
+      display: flex;
+      @include pc{
+        padding-top: 20px;
+      }
+      @include tab{
+        padding-top: 10px;
+      }
+      @include sp{
+        padding-top: 10px;
+        font-size: 1.0rem;
+      }
+      .label-follower{
+        font-weight: bold;
+        color: white;
+      }//label-follower
+      .search{
+        margin-left: 30px;
+        form{
+          display: flex;
+          @include pc{
+            background-color: white;
+          }
+          @include sp{
+            background-color: white;
+          }
+          input[type="text"],input[type="email"],input[type="password"]{
+            width: 100%;
+          }//input
+        }//form
+      }//search
+    }//title
+    .no-underline{
+      text-decoration:none !important;
+      color: white;
+    }
+    .users{
+      width: 100%;
+      height: 90%;
+      display: block;
+      overflow-y: scroll;
+      @include sp{
+        font-size: 1.0rem;
+      }
+      .user{
+        padding: 5px;
+        border-bottom: 1px solid white;
+        transition: 0.3s;
+        .icon_image {
+          width: 80px;
+          height: 80px;
+          //サイズ指定
+          border-radius: 100px;
+          //画像を丸くする
+          object-fit: cover;
+          //タテヨコ比を変えないままトリミング
+          @include tab{
+            width: 60px;
+            height: 60px;
+          }
+          @include sp{
+            width: 60px;
+            height: 60px;
+          }
+        }//icon_image
+      }//user
+      .user:hover{
+        color: blue;
+      }//user:hover
+    }//users
+  }//.container-main-followers
+}//main_users
+
+//users.show.html.erb
+.main_user_show{
+  background-color: rgba(0,0,0,0.7);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  font-size: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  z-index: 0;
+  .sidemenu{
+    width: 25%;
+    height: 80vh;
+    padding: 10px;
+    position: absolute;
+    top: 140px;
+    left: 0;
+    font-size: 1.2rem;
+    display: flex;
+    color: white;
+    @include pc{
+      display: none;
+    }
+    .profile_usericon{
+
+      .icon_image {
+        width: 100px;
+        height: 100px;
+        border-radius: 100px;
+        object-fit: cover;
+        @include tab{
+          width: 70px;
+          height: 70px;
+          border-radius: 100px;
+          object-fit: cover;
+        }
+        @include sp{
+          width: 70px;
+          height: 70px;
+          border-radius: 100px;
+          object-fit: cover;
+        }
+      }//icon_image
+    }//profile_usericon
+    .menu_list{
+      width: 100%;
+      overflow: hidden;
+      word-wrap: break-word;
+
+      .no-underline{
+        text-decoration:none !important;
+        color: white;
+      }//no-underline
+      h3{
+        font-weight: bold;
+      }//h3
+      ul{
+        list-style: none;
+        li{
+          padding: 5px;
+          text-align: center;
+          transform: 0.3s;
+        }//li
+        li:hover{
+          background-color: rgba(0,0,0,1);
+          border-radius: 10px;
+          color: #67a8dd;
+        }//li:hover
+        .no-underline:hover{
+          color: #67a8dd;
+        }
+      }//ul
+    }//menu_list
+  }//sidemenu
+  .container{
+    width: 50%;
+    height: 80vh;
+    position: absolute;
+    overflow-y: scroll;
+    top: 140px;
+    left: 25%;
+    font-size: 1.6rem;
+    text-align: left;
+    @include pc{
+      position: absolute;
+      top: 140px;
+      left: 25px;
+      width: 100%;
+      height: 85vh;
+    }
+    @include tab{
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: 85vh;
+    };
+    @include sp{
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: 80vh;
+    };
+    .post{
+      display: block;
+      vertical-align: middle;
+      padding: 10px;
+      color: white;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,1.0);
+      font-size: 1.2rem;
+      transition: 0.3s;
+      @include tab{
+        font-size: 1.0rem;
+      }
+      @include sp{
+        font-size: 1.0rem;
+      }
+      h2{
+        font-weight: bold;
+        padding: 10px 0;
+      }
+      .text_area{
+        background-color: rgba(0,0,0,0.3);
+        color: white;
+        width: 100%;
+        height: 450px;
+        @include pc{
+          height: 65vh;
+        }
+        @include tab{
+          height: 60vh;
+        }
+        @include sp{
+          height: 55vh;
+        }
+      }//text_area
+      .image{
+        @include pc{
+          background-color: rgba(255,255,255,1);
+          width: 30%;
+          border-radius: 5px;
+        }
+        @include tab{
+          width: 40%;
+        }
+        @include sp{
+          width: 40%;
+        }
+      }//image
+      #category{
+        background-color: white;
+        padding-bottom: 5px;
+      }//category
+      .action{
+        text-align: center;
+        .action-child{
+          font-weight: bold;
+          color: white;
+          background-color: rgba(222,222,222,0.3);
+          border: 2px solid white;
+          border-radius: 5px;
+          margin: 10px auto;
+          padding: 5px 20px;
+          transition: 0.3s;
+        }//action-child
+        .action-child:hover{
+          background-color: black;
+          transform: scale(1.2);
+        }//action-child:hover
+      }//action
+      .no-underline{
+        text-decoration:none !important;
+        color: white;
+        transition: 0.3s;
+      }//no-underline
+      .post_top{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        .userinfo{
+          display: flex;
+          height: 80px;
+          .icon_img{
+            margin: 5px;
+            width: 70px;
+            height: 70px;
+            //サイズ指定
+            border-radius: 100px;
+            //画像を丸くする
+            object-fit: cover;
+            //タテヨコ比を変えないままトリミング
+          }//icon_img
+          .username{
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            white-space: nowrap;
+            font-weight: bold;
+            line-height: 80px;
+          }//username
+        }//userinfo
+        .post_body{
+          width: 100%;
+          padding-left: 80px;
+        }//post_body
+        .post_img{
+          width: 50%;
+          margin: 0 auto;
+          text-align: center;
+          //投稿に載せる用の写真
+          .img{
+            margin-top: 5px;
+            width: 100%;
+            height: 70%; //サイズ指定
+            object-fit: cover; //タテヨコ比を変えないままトリミング
+          }//img
+        }
+      }//post_top
+      .post_bottom{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+        padding-right: 10px;
+        font-size: 1.0rem;
+        @include tab{
+          display: flex;
+          padding-right: 0px;
+          justify-content: flex-end;
+          font-size: 1.0rem;
+        }
+        @include sp{
+          display: flex;
+          padding-right: 0px;
+          justify-content: flex-end;
+          font-size: 1.0rem;
+        }
+        .category_each{
+          margin-right: 20px;
+          padding-top: 2px;
+          transition: 0.3s;
+        }//category_each
+        .good{
+          margin-right: 10px;
+          font-size: 1.2rem;
+          .my-fab{
+            color: green;
+          }//my-fab
+        }//good
+        .good:last-child{
+          @include tab{
+            margin-right: 10px;
+            margin-top: -10px;
+            font-size: 1.0rem;
+          }
+          @include sp{
+            margin-right: 10px;
+            margin-top: -3px;
+            font-size: 1.0rem;
+          }
+        }//good:last-child
+        .comment{
+          margin-right: 10px;
+          font-size: 1.2rem;
+        }//comment
+        .time{
+        }//time
+      }//post_bottom
+    }//post
+    .post:hover{
+      background-color: rgba(0,0,0,0.6);
+    }//post:hover
+  }//.container
+}//main_user_show
+
+//main_follower,main_following
+.main_follower,.main_following{
+  background-color: rgba(0,0,0,0.7);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  font-size: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  z-index: 0;
+  .sidemenu{
+    width: 25%;
+    height: 80vh;
+    padding: 10px;
+    position: absolute;
+    top: 140px;
+    left: 0;
+    font-size: 1.2rem;
+    display: flex;
+    color: white;
+    @include pc{
+      display: none;
+    }
+    .profile_usericon{
+      .icon_image {
+        width: 100px;
+        height: 100px;
+        border-radius: 100px;
+        object-fit: cover;
+        @include tab{
+          width: 70px;
+          height: 70px;
+          border-radius: 100px;
+          object-fit: cover;
+        }
+        @include sp{
+          width: 70px;
+          height: 70px;
+          border-radius: 100px;
+          object-fit: cover;
+        }
+      }//icon_image
+    }//profile_usericon
+    .menu_list{
+      width: 100%;
+      overflow: hidden;
+      word-wrap: break-word;
+
+      .no-underline{
+        text-decoration:none !important;
+        color: white;
+      }//no-underline
+      h3{
+        font-weight: bold;
+      }//h3
+      ul{
+        list-style: none;
+        li{
+          padding: 5px;
+          text-align: center;
+          transform: 0.3s;
+        }//li
+        li:hover{
+          background-color: rgba(0,0,0,1);
+          border-radius: 10px;
+          color: #67a8dd;
+        }//li:hover
+        .no-underline:hover{
+          color: #67a8dd;
+        }
+      }//ul
+    }//menu_list
+  }//sidemenu
+  .container{
+    width: 50%;
+    height: 80vh;
+    position: absolute;
+    overflow-y: scroll;
+    top: 140px;
+    left: 25%;
+    font-size: 1.6rem;
+    text-align: left;
+    @include pc{
+      position: absolute;
+      top: 140px;
+      left: 25px;
+      width: 100%;
+      height: 85vh;
+    }
+    @include tab{
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: 85vh;
+    };
+    @include sp{
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: 80vh;
+    };
+    .title{
+      width: 100%;
+      height: 10%;
+      padding-top: 10px;
+      display: flex;
+      @include pc{
+        padding-top: 20px;
+      }
+      @include tab{
+        padding-top: 10px;
+      }
+      @include sp{
+        padding-top: 10px;
+        font-size: 1.0rem;
+      }
+      .label-follower{
+        font-weight: bold;
+        color: white;
+      }//label-follower
+      .search{
+        margin-left: 30px;
+        form{
+          @include pc{
+            background-color: white;
+          }
+          @include sp{
+            background-color: white;
+          }
+        }
+      }//search
+    }//title
+    .no-underline{
+      text-decoration:none !important;
+      color: white;
+    }
+    .users{
+      width: 100%;
+      height: 90%;
+      display: block;
+      overflow-y: scroll;
+      @include sp{
+        font-size: 1.0rem;
+      }
+      .userinfo{
+        padding: 5px;
+        border-bottom: 1px solid white;
+        transition: 0.3s;
+        .icon_img{
+          width: 80px;
+          height: 80px;
+          //サイズ指定
+          border-radius: 100px;
+          //画像を丸くする
+          object-fit: cover;
+          //タテヨコ比を変えないままトリミング
+          @include tab{
+            width: 60px;
+            height: 60px;
+          }
+          @include sp{
+            width: 60px;
+            height: 60px;
+          }
+        }//icon_image
+      }//user
+      .user:hover{
+        color: blue;
+      }//user:hover
+    }//users
+  }//.container
+}//main_follower

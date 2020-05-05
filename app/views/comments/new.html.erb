@@ -1,0 +1,58 @@
+<div class="main-posts-index post-show">
+  <div class="container-posts-index">
+    <div class="post">
+      <%= link_to("/users/#{@post.user_id}", class:"no-underline") do%>
+      <div class="post_top">
+        <div class="post_top_userinfo">
+          <% if User.find_by(id: @post.user_id).image?%>
+            <img src=<%= User.find_by(id: @post.user_id).image %> class = "icon_image_posts_index">
+          <%else%>
+            <image src="/assets/default.jpg" class="icon_image_posts_index" alt="ユーザーアイコン" %>
+          <% end %>
+        </div>
+        <div class="post_top_body">
+          <div class="post_top_body_username">
+            <%= @post.user.username%>
+          </div>
+          <%= simple_format(@post.body)%>
+        </div>
+      </div>
+      <%end%>
+      <div class="post_bottom">
+        <% if current_user == User.find_by(id: @post.user_id)%>
+          <%= link_to(post_path(@post.id),method: :delete, :class=>"post_bottom_idea no-underline",
+          data: { confirm: '削除しますか?' }) do %>
+            この豆知識を消す
+          <%end%>
+        <%end%>
+        <div class="post_bottom_good">
+          <% if Like.find_by(user_id: current_user.id, post_id: @post.id)%>
+            <%= link_to("/likes/#{@post.id}/destroy", method: :post, :class => "no-underline") do %>
+            <i class="fab fa-angellist my-fab post-show-icon"></i>
+            <%end%>
+          <%else%>
+            <%= link_to({controller: "likes", action: "create", post_id: @post.id}, method: :post, :class => "no-underline") do%>
+            <i class="fab fa-angellist post-show-icon"></i>
+            <%end%>
+          <%end%>
+          <i class="good"><%= @likes_count%></i>
+        </div>
+        <%= link_to({controller: "comments", action: :new, post_id: @post.id, method: :get, :class=>"no-underline"}) do%>
+        <i class="far fa-comment-dots post-show-icon"></i>
+        <i class="comment"><%= @comments_count%></i>
+        <%end%>
+        <i class="create_time"><%= @post.created_at%></i>
+      </div>
+    </div>
+
+    <div class="post">
+      <h2>コメント</h2>
+      <%= form_with url: "/comments/#{@post.id}/create" do |form| %>
+        <%= form.text_area :body, class:"text_area text_area_comment"%>
+        <div class="action">
+          <%= form.submit :class=>"submit" , :value => "投稿", class:"action-child"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

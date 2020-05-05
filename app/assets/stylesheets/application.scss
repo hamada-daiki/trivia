@@ -1,0 +1,475 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+ */
+@import "bootstrap";
+@import "home";
+@import "users";
+@import "posts";
+@import "registration";
+
+.clearfix::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+//スマホ、タブレット向け
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+html {
+    height: 100vh;
+}
+body{
+  height: 100vh;
+}
+//link_toのdecorationを無効
+.no-underline{
+  text-decoration:none !important;
+}//no-underline
+//sp,tabで表示を消す用
+.display_none_sp{
+  @include sp{
+    display: none;
+  }
+}//display_none_sp
+.display_none_tab{
+  @include tab{
+    display: none;
+  }
+}//display_none_tab
+.display_none_pc{
+  @include pc{
+    display: none;
+  }
+}//display_none
+//flashes
+.flashes{
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  top: 90px;
+  z-index: 3;
+  background-color: rgba(0,0,0,0.7);
+  @include pc{
+    display: none;
+  }
+  .notice{
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    background-color: rgba(0,255,255,1);
+    color: white;
+    font-weight: bold;
+  }//notice
+  .alert{
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    background-color: rgba(255,0,0,1);
+    color: white;
+    font-weight: bolder;
+  }//alert
+}//flashes
+//ヘッダー
+header{
+  padding-top: 10px;
+  width: 100%;
+  background-color: rgba(0,0,0,0.7);
+  position: relative;
+  z-index: 2;
+  .menu{
+    display: flex;
+    height: 80px;
+    width: 100%;
+
+    @include pc{
+      height: 100px;
+    }
+    @include tab{
+      height: 60px;
+    }
+    @include sp{
+      height: 60px;
+    }
+    .menu_child1{
+      width: 50%;
+      height: 100%;
+      display: flex;
+      @include pc{
+        width: 90%;
+      }
+      @include tab{
+        width: 90%;
+      }
+      @include sp{
+        width: 90%;
+      }
+      .no-underline{
+        text-decoration:none !important;
+      }//no-underline
+      .title{
+        margin-left: 30px;
+        line-height: 80px;
+        font-weight: bold;
+        color: white;
+        @include pc{
+          line-height: 100px;
+          font-size: 2.5rem;
+        }
+        @include tab{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+      }//title
+      .user_image{
+        .icon_image {
+          width: 80px;
+          height: 80px;
+          //サイズ指定
+          border-radius: 100px;
+          //画像を丸くする
+          object-fit: cover;
+          //タテヨコ比を変えないままトリミング
+          @include tab{
+            width: 60px;
+            height: 60px;
+          }
+          @include sp{
+            width: 60px;
+            height: 60px;
+          }
+        }//icon_image
+      }//user_image
+      .user_name{
+        padding: 0 10px;
+        line-height: 80px;
+        color: white;
+        transition: 0.3s;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        @include pc{
+          width: 600px;
+          line-height: 100px;
+          font-size: 2.0rem;
+        }
+        @include tab{
+          width: 270px;
+          line-height: 60px;
+          font-size: 1.0rem;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.0rem;
+        }
+      }//user_name
+    }//menu_child1
+    .menu_child2{
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-end;
+      @include pc{
+        width: 10%;
+      }
+      @include tab{
+        width: 10%;
+      }
+      @include sp{
+        width: 10%;
+      }
+      .no-underline{
+        text-decoration:none !important;
+      }//no-underline
+      .sign_in,.user_name{
+        padding: 0 20px;
+        line-height: 80px;
+        color: white;
+        transition: 0.3s;
+        @include pc{
+          line-height: 100px;
+          font-size: 2.0rem;
+        }
+        @include tab{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+      }//sign_in,user_name
+      .sign_out,.new_post,.postall,.userall,.sign_up{
+        padding: 0 20px;
+        line-height: 80px;
+        color: white;
+        transition: 0.3s;
+        @include pc{
+          line-height: 100px;
+          font-size: 2.0rem;
+          display: none;
+        }
+        @include tab{
+          line-height: 60px;
+          font-size: 1.2rem;
+          display: none;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.2rem;
+          display: none;
+        }
+      }//.sign_out,.new_post,.postall,.userall,.sign_up
+      .my-bars{
+        padding: 0 20px;
+        line-height: 80px;
+        color: white;
+        transition: 0.3s;
+        font-size: 0;
+        @include pc{
+          line-height: 100px;
+          font-size: 2.0rem;
+        }
+        @include tab{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+      }//my-bars
+      .sign_out:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//sign_out:hover
+      .new_post:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//new_post:hover
+      .sign_in:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//sign_in:hover
+      .postall:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//postall:hover
+      .userall:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//userall:hover
+      .sign_up:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//sign_up:hover
+    }//menu_child2
+    .menu_child3{
+      width: 50%;
+      height: 100%;
+      display: flex;
+      @include pc{
+        width: 40%;
+      }
+      @include tab{
+        width: 40%;
+      }
+      @include sp{
+        width: 40%;
+      }
+      .no-underline{
+        text-decoration:none !important;
+      }//no-underline
+      .title{
+        margin-left: 30px;
+        line-height: 80px;
+        font-weight: bold;
+        color: white;
+        @include pc{
+          line-height: 100px;
+          font-size: 2.5rem;
+        }
+        @include tab{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+      }//title
+      .user_image{
+        .icon_image {
+          width: 80px;
+          height: 80px;
+          //サイズ指定
+          border-radius: 100px;
+          //画像を丸くする
+          object-fit: cover;
+          //タテヨコ比を変えないままトリミング
+          @include tab{
+            width: 60px;
+            height: 60px;
+          }
+          @include sp{
+            width: 60px;
+            height: 60px;
+          }
+        }//icon_image
+      }//user_image
+      .user_name{
+        padding: 0 10px;
+        line-height: 80px;
+        color: white;
+        transition: 0.3s;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        @include pc{
+          line-height: 100px;
+          font-size: 2.0rem;
+        }
+        @include tab{
+          width: 98%;
+          line-height: 60px;
+          font-size: 1.0rem;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.0rem;
+        }
+      }//user_name
+    }//menu_child1
+    .menu_child4{
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-end;
+      @include pc{
+        width: 60%;
+      }
+      @include tab{
+        width: 60%;
+      }
+      @include sp{
+        width: 60%;
+      }
+      .no-underline{
+        text-decoration:none !important;
+      }//no-underline
+      .sign_in,.user_name{
+        padding: 0 20px;
+        line-height: 80px;
+        color: white;
+        transition: 0.3s;
+        @include pc{
+          line-height: 100px;
+          font-size: 2.0rem;
+        }
+        @include tab{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+      }//sign_in,user_name
+      .sign_out,.new_post,.postall,.userall,.sign_up{
+        padding: 0 20px;
+        line-height: 80px;
+        color: white;
+        transition: 0.3s;
+        @include pc{
+          line-height: 100px;
+          font-size: 2.0rem;
+          display: none;
+        }
+        @include tab{
+          line-height: 60px;
+          font-size: 1.2rem;
+          display: none;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.2rem;
+          display: none;
+        }
+      }//.sign_out,.new_post,.postall,.userall,.sign_up
+      .my-bars{
+        padding: 0 20px;
+        line-height: 80px;
+        color: white;
+        transition: 0.3s;
+        font-size: 0;
+        @include pc{
+          line-height: 100px;
+          font-size: 2.0rem;
+        }
+        @include tab{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+        @include sp{
+          line-height: 60px;
+          font-size: 1.2rem;
+        }
+      }//my-bars
+      .sign_out:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//sign_out:hover
+      .new_post:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//new_post:hover
+      .sign_in:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//sign_in:hover
+      .postall:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//postall:hover
+      .userall:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//userall:hover
+      .sign_up:hover{
+        border: 1px solid white;
+        background-color: rgba(222,222,222,0.2);
+      }//sign_up:hover
+    }//menu_child2
+  }//menu
+}

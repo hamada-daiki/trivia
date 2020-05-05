@@ -1,0 +1,8 @@
+<%= form_with(model: comment, local: true) do |form| %>
+  <%= form.text_area :body, class:"text_area"%>
+  <div class="action">
+    <%= form.submit :class=>"submit" , :value => "投稿", class:"action-child"%>
+  </div>
+  <%= f.label :画像 %><br />
+  <%= f.file_field :img, class: "image" %>
+<% end %>

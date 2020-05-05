@@ -1,0 +1,27 @@
+<div class="main_users">
+  <div class="container">
+    <div class="title">
+      <label class="label-follower">ユーザ一覧</label>
+      <div class="search">
+        <%= form_tag(users_search_path) do %>
+          <%= text_field_tag :search %>
+          <%= submit_tag '検索', :name => nil %>
+        <% end %>
+      </div>
+    </div>
+    <div class="users">
+      <% @users.each do |user| %>
+        <%= link_to("/users/#{user.id}",class:"no-underline") do%>
+          <div class="user">
+            <% if User.find_by(id: user.id).image?%>
+              <img src=<%= User.find_by(id: user.id).image %> class = "icon_image">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon_image" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= User.find(user.id).username%>
+          </div>
+        <%end%>
+      <%end%>
+    </div>
+  </div>
+</div>

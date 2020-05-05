@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  body: カバの口は臭い
+  user_id: 1
+
+two:
+  id: 2
+  body: 馬の足は美味しい
+  user_id: 2

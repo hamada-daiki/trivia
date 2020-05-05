@@ -1,0 +1,47 @@
+<div class="main_follower">
+  <div class="sidemenu">
+    <div class="profile_usericon">
+      <% if @user.image?%>
+        <img src=<%= @user.image %> class = "icon_image">
+      <%else%>
+        <image src="/assets/default.jpg" class="icon_image" alt="ユーザーアイコン" %>
+      <% end %>
+      <%= render 'relationships/follow_button', user: @user %>
+    </div>
+    <div class="menu_list">
+      <ul>
+        <li><h3><%= @user.username%></h3></li>
+        <% if @user.id == current_user.id%>
+        <li><%= link_to(edit_user_registration_path(current_user.id), class:"no-underline") do %>
+          プロフィール編集
+        <%end%>
+        </li>
+        <%end%>
+        <li><%= link_to "投稿一覧", "/users/#{@user.id}", class:"no-underline"%></li>
+        <li><%= link_to "お気に入り一覧","/users/#{@user.id}/like", class:"no-underline"%></li>
+        <li><%= link_to '皆んなの投稿一覧', posts_path, class:"no-underline"%></li>
+        <li><%= link_to "follower", "/users/#{@user.id}/follower", class:"no-underline"%></li>
+        <li><%= link_to "following", "/users/#{@user.id}/following", class:"no-underline"%></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <div class="title">
+      <label class="label-follower">フォロワー</label>
+    </div>
+    <div class="users">
+      <% @followers.each do |follower| %>
+        <%= link_to("/users/#{follower.user_id}",class:"no-underline") do%>
+          <div class="userinfo">
+            <% if User.find_by(id: follower.user_id).image?%>
+              <img src=<%= User.find_by(id: follower.user_id).image %> class = "icon_img">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon_img" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= User.find(follower.user_id).username%>
+          </div>
+        <%end%>
+      <%end%>
+    </div>
+  </div>
+</div>

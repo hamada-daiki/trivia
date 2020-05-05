@@ -1,0 +1,386 @@
+//new.html
+// body{
+//   // 背景のみの透過
+//   background: image-url('top_page.jpg');
+//   background-color:rgba(255,255,255,0.3);
+//   background-blend-mode:lighten;
+//   background-size: cover;
+// }
+// .main_regis{
+//   margin-top: 50px;
+
+.container{
+
+  .field, .actions, .links{
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  // .actions{
+  //   margin-top: 30px;
+  //
+  //   .botton{
+  //     padding: 5px 10px;
+  //     width: 100px;
+  //     border-radius: 10px;
+  //     box-shadow: 0 4px 0 0 rgba(0,0,0,0.5);
+  //     color: white;
+  //   }
+  //   .sign_up_new{
+  //     background-color: green;
+  //     border: 2px solid green;
+  //   }
+  //   .login_new{
+  //     background-color: orange;
+  //     border: 2px solid orange;
+  //   }
+  // }
+  input[type="text"],input[type="email"],input[type="password"]{
+    width: 100%;
+  }
+}//container
+
+.sign_up_regis_option{
+  padding-top: 15px;
+}
+
+//スマホ、タブレット向け
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+body{
+  // 背景のみの透過
+  background: image-url('top_page.jpg');
+  background-color:rgba(255,255,255,0.3);
+  background-blend-mode:lighten;
+  background-size: cover;
+}
+#error_explanation{
+  color: white;
+}
+.main_regis{
+  background-color: rgba(0,0,0,0.7);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  font-size: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  z-index: 0;
+  .container{
+    width: 50%;
+    height: 80vh;
+    position: absolute;
+    overflow-y: scroll;
+    top: 140px;
+    left: 25%;
+    font-size: 1.6rem;
+    text-align: left;
+    @include pc{
+      position: absolute;
+      top: 140px;
+      left: 25px;
+      width: 100%;
+      height: 85vh;
+    }
+    @include tab{
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: 85vh;
+    };
+    @include sp{
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: 80vh;
+    };
+    h2{
+      font-size: 1.4rem;
+      color: white;
+      padding-bottom: 20px;
+      font-weight: bold;
+    }
+    .remember_me{
+      text-align: left;
+      color: white;
+      font-size: 1.2rem;
+    }//remember_me
+    .field_label{
+      color: white;
+      text-align: left;
+      font-weight: bold;
+      font-size: 1.2rem;
+      .field_label_password{
+        // display: none;
+        @include pc{
+          display:inline;
+        }
+      }//field_label_password
+      .image{
+        @include pc{
+          background-color: rgba(222,222,222,1);
+          width: 25%;
+          color: rgba(222,222,222,1);
+        }
+        @include tab{
+          width: 45%;
+        }
+      }//image
+      .sign_up_top, .forget_password_top{
+        padding-left: 10px;
+        line-height: 0.8rem;
+        color: white;
+        transition: 0.3s;
+        font-weight: normal;
+        font-size: 0.8rem;
+        @include pc{
+          font-size: 1.2rem;
+        }
+        @include tab{
+          font-size: 0.8rem;
+        }
+      }//signup_top,forget_password_top
+      .sign_up_top:hover{
+        color: #67a8dd;
+        transform: scale(1.2);
+      }//sign_up_top:hover
+      .forget_password_top:hover{
+        color: #67a8dd;
+      }//forget_password_top:hover
+      .sign_up_forget_password{
+        line-height: 0.8rem;
+        padding-top: 20px;
+        color: white;
+        transition: 0.3s;
+        font-weight: normal;
+        font-size: 0.8rem;
+        @include pc{
+          font-size: 1.2rem;
+        }
+        @include sp{
+          font-size: 0.8rem;
+        }
+      }//sign_up_forget_password
+      .sign_up_forget_password:hover{
+        color: #67a8dd;
+      }//sign_up_forget_password:hover
+      .sign_in_forget_password{
+        line-height: 0.8rem;
+        padding-left: 20px;
+        padding-right: 10px;
+        padding-top: 20px;
+        color: white;
+        transition: 0.3s;
+        font-weight: normal;
+        font-size: 0.8rem;
+        @include pc{
+          font-size: 1.2rem;
+          padding-left: 0;
+        }
+        @include tab{
+          font-size: 0.8rem;
+        }
+      }//sign_in_forget_password
+      .sign_in_forget_password:hover{
+        color: #67a8dd;
+      }//sign_in_forget_password:hover
+    }//field_label
+    .send_password_forget_password{
+      padding: 5px 10px;
+      margin-left: 10px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 0 0 rgba(0,0,0,0.5);
+      color: black;
+      transition: 0.3s;
+      @include pc{
+        font-size: 1.4rem;
+        margin: 20px 0 0;
+      }
+      @include tab{
+        font-size: 1.0rem;
+      }
+    }//send_password_forget_password
+    .send_password_forget_password:hover{
+      background-color: rgba(222,222,222,0.3);
+      color: white;
+    }//send_password_forget_password:hover
+    .field_label_image{
+      color: white;
+      text-align: left;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: flex;
+      @include pc{
+        display: flex;
+        flex-direction: column;
+        font-size: 1.4rem;
+      }
+      @include tab{
+        font-size: 1.2rem;
+      }
+      .img_select{
+        margin-left: 10px;
+        @include pc{
+          margin-left: 0;
+          color: rgba(200,200,200,1);
+          background-color: rgba(200,200,200,1);
+          width: 45%;
+        }
+      }//img_select
+    }//field_label_image
+    .actions{
+      margin-top: 30px;
+      font-size: 1.2rem;
+      @include pc{
+        font-size: 1.6rem;
+      }
+      @include tab{
+        font-size: 1.2rem;
+      }
+      .botton{
+        padding: 5px 10px;
+        width: 100px;
+        border-radius: 10px;
+        box-shadow: 0 4px 0 0 rgba(0,0,0,0.5);
+        color: white;
+        @include pc{
+          width: 150px;
+        }
+        @include tab{
+          width: 100px;
+        }
+      }//botton
+      .sign_up_new{
+        background-color: green;
+        border: 2px solid green;
+      }//sign_up_new
+      .login_new{
+        background-color: orange;
+        border: 2px solid orange;
+      }//login_new
+      .delete_bottom{
+        display: none;
+      }//delete_bottom
+      .regis{
+        display: none;
+      }//regis
+    }//actions
+    //login_form関係
+    .actions_regis{
+      display: flex;
+      @include pc{
+        display: block;
+      }
+      .bottom{
+        padding: 5px 10px;
+        margin-left: 150px;
+        margin-bottom: 20px;
+        width: 100px;
+        border-radius: 10px;
+        box-shadow: 0 4px 0 0 rgba(0,0,0,0.5);
+        color: white;
+        @include pc{
+          width: 150px;
+        }
+        @include tab{
+          width: 100px;
+          margin-left: 0px;
+        }
+      }//bottom
+      .sign_up_regis{
+        font-size: 1.2rem;
+        background-color: green;
+        border: 2px solid green;
+        @include pc{
+          font-size: 1.4rem;
+          margin-left: 0;
+          margin-top: 20px;
+        }
+        @include tab{
+          font-size: 1.2rem;
+        }
+      }//sign_up_regis
+      .sign_up_top_option{
+        padding-left: 0px;
+      }//sign_up_top_option
+    }//actions_regis
+    // .sign_in_forget_password{
+    //   @include tab{
+    //     font-size: 1.2rem;
+    //     float: left;
+    //     margin-left: 70px;
+    //     margin-top: 10px;
+    //     background-color: orange;
+    //     padding: 15px 10px;
+    //     border-radius: 10px;
+    //     box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.5);
+    //     color: white;
+    //   };
+    //   @include sp{
+    //     font-size: 1.2rem;
+    //     float: left;
+    //     margin-left: 70px;
+    //     margin-top: 10px;
+    //     background-color: orange;
+    //     padding: 15px 10px;
+    //     border-radius: 10px;
+    //     box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.5);
+    //     color: white;
+    //   };
+    // }//sign_in_forget_password
+    // .sign_up_forget_password{
+    //   @include tab{
+    //     font-size: 1.2rem;
+    //     float: right;
+    //     margin-right: 70px;
+    //     margin-top: 10px;
+    //     background-color: green;
+    //     padding: 15px 10px;
+    //     border-radius: 10px;
+    //     box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.5);
+    //     color: white;
+    //   };
+    //   @include sp{
+    //     font-size: 1.2rem;
+    //     float: right;
+    //     margin-right: 70px;
+    //     margin-top: 10px;
+    //     background-color: green;
+    //     padding: 15px 10px;
+    //     border-radius: 10px;
+    //     box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.5);
+    //     color: white;
+    //   };
+    // }//sign_up_forget_password
+    .send_password_forget_password{
+      @include tab{
+        margin: 20px auto 0;
+      };
+      @include sp{
+        margin: 20px auto 0;
+      };
+    }//send_password_forget_password
+  }//container
+}//main_regis

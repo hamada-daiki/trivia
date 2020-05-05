@@ -1,0 +1,19 @@
+<div class="main_posts_index">
+  <div class="container">
+    <div class="post">
+      <%= form_with url: posts_path do |form| %>
+
+        <%= form.text_area :body, class:"text_area"%>
+        <%= form.label :画像 %>
+        <%= form.file_field :img, class: "image" %><br/>
+        <%= form.label :category, "ジャンル"%>
+        <%= form.select :category, ["食べ物","洋服","美容","医療","勉強","スポーツ","ゲーム","保険","お金","その他"]%>
+        <%= %>
+        <div class="action">
+          <%= form.submit :class=>"submit" , :value => "投稿", class:"action-child"%>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

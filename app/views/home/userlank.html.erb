@@ -1,0 +1,65 @@
+<div class="main_home_userlank">
+  <div class="home_userlank">
+    <label class="label-lank">豆知識ランキング</label>
+    <% @lanking.each do |user_id,points|%>
+      <%= link_to("/users/#{user_id}",class:"no-underline") do%>
+      <div class="userinfo_userlank">
+        <% if @lank == 1%>
+          <div class="userinfo_userlank_lank no1">
+            <%= @lank%>
+          </div>
+          <div class="userinfo_userlank_infomation no1">
+            <% user = User.find(user_id)%>
+            <% if user.image?%>
+              <img src=<%= user.image %> class = "icon-image-lank">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon-image-lank no-icon-image" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= user.username%>
+          </div>
+        <% elsif @lank == 2%>
+          <div class="userinfo_userlank_lank no2">
+            <%= @lank%>
+          </div>
+          <div class="userinfo_userlank_infomation no2">
+            <% user = User.find(user_id)%>
+            <% if user.image?%>
+              <img src=<%= user.image %> class = "icon-image-lank no2-icon-image">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon-image-lank no2-icon-image no-icon-image" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= user.username%>
+          </div>
+        <% elsif @lank == 3%>
+          <div class="userinfo_userlank_lank no3">
+            <%= @lank%>
+          </div>
+          <div class="userinfo_userlank_infomation no3">
+            <% user = User.find(user_id)%>
+            <% if user.image?%>
+              <img src=<%= user.image %> class = "icon-image-lank no3-icon-image">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon-image-lank no3-icon-image no-icon-image" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= user.username%>
+          </div>
+        <% else%>
+          <div class="userinfo_userlank_lank no">
+            <%= @lank%>
+          </div>
+          <div class="userinfo_userlank_infomation no">
+            <% user = User.find(user_id)%>
+            <% if user.image?%>
+              <img src=<%= user.image %> class = "icon-image-lank no-icon-image">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon-image-lank no-icon-image no-icon-image" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= user.username%>
+          </div>
+        <% end%>
+      </div>
+      <%end%>
+      <% @lank += 1%>
+    <%end%>
+  </div>
+</div>

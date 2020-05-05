@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Trivia</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=devide-width,initial-scale=1.0,minimum-scale=1.0">
+  </head>
+
+  <body>
+    <header>
+      <div class="menu clearfix">
+        <% if current_user%>
+          <div class="menu_child1">
+            <%= link_to("/users/#{current_user.id}", class:"no-underline") do%>
+              <div class="user_image">
+                <% if current_user.image?%>
+                  <img src=<%= current_user.image %> class = "icon_image ">
+                <%else%>
+                  <image src="/assets/default.jpg" class="icon_image " alt="ユーザーアイコン" %>
+                <% end %>
+              </div>
+            <%end%>
+            <%= link_to("/users/#{current_user.id}", class:"no-underline") do%>
+              <h4 class="user_name"><%= current_user.username%></h4>
+            <%end%>
+          </div>
+          <div class="menu_child2">
+            <%= link_to "/home/menu" , class:"no-underline" do%>
+              <i class="fas fa-bars my-bars"></i>
+            <%end%>
+            <%= link_to destroy_user_session_path, method: :delete, class:"no-underline" do%>
+              <h4 class="sign_out">
+                ログアウト
+              </h4>
+            <%end%>
+            <%= link_to new_post_path,class:"no-underline"  do%>
+              <h4 class="new_post">
+                新規投稿
+              </h4>
+              <%end%>
+            <%= link_to posts_path,class:"no-underline" do%>
+              <h4 class="postall">
+                投稿一覧
+              </h4>
+            <%end%>
+            <%= link_to "/users/index",class:"no-underline" do%>
+              <h4 class="userall">
+                ユーザ一覧
+              </h4>
+            <%end%>
+          </div>
+        <% else %>
+          <div class="menu_child3">
+            <%= link_to(root_path,class:"no-underline") do%>
+              <h4 class="title">
+                豆知識
+              </h4>
+            <%end%>
+          </div>
+          <div class="menu_child4">
+            <%= link_to(new_user_session_path,class:"no-underline") do%>
+              <h4 class="sign_in">
+                ログイン
+              </h4>
+            <%end%>
+            <%= link_to(new_user_registration_path,class:"no-underline") do%>
+              <h4 class="sign_up">
+                新規登録
+              </h4>
+            <%end%>
+          </div>
+        <% end%>
+      </div>
+    </header>
+    <% if flash[:notice] || flash[:alert]%>
+      <% if flash[:notice]%>
+        <div class="flashes">
+          <p class="notice"><%= notice %></p>
+        </div>
+      <% else %>
+        <div class="flashes">
+          <p class="alert"><%= alert %></p>
+        </div>
+      <% end %>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

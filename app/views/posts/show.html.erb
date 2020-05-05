@@ -1,0 +1,277 @@
+<div class="main_posts_index">
+  <div class="userlank">
+    <label class="label-lank">豆知識ランキング</label>
+    <% @lanking.each do |user_id,points|%>
+      <%= link_to("/users/#{user_id}",class:"no-underline") do%>
+      <div class="userinfo_userlank">
+        <% if @lank == 1%>
+          <div class="userinfo_userlank_lank no1">
+            <%= @lank%>
+          </div>
+          <div class="userinfo_userlank_infomation no1">
+            <% user = User.find(user_id)%>
+            <% if user.image?%>
+              <img src=<%= user.image %> class = "icon-image-lank">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon-image-lank no-icon-image" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= user.username%>
+          </div>
+        <% elsif @lank == 2%>
+          <div class="userinfo_userlank_lank no2">
+            <%= @lank%>
+          </div>
+          <div class="userinfo_userlank_infomation no2">
+            <% user = User.find(user_id)%>
+            <% if user.image?%>
+              <img src=<%= user.image %> class = "icon-image-lank no2-icon-image">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon-image-lank no2-icon-image no-icon-image" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= user.username%>
+          </div>
+        <% elsif @lank == 3%>
+          <div class="userinfo_userlank_lank no3">
+            <%= @lank%>
+          </div>
+          <div class="userinfo_userlank_infomation no3">
+            <% user = User.find(user_id)%>
+            <% if user.image?%>
+              <img src=<%= user.image %> class = "icon-image-lank no3-icon-image">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon-image-lank no3-icon-image no-icon-image" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= user.username%>
+          </div>
+        <% else%>
+          <div class="userinfo_userlank_lank no">
+            <%= @lank%>
+          </div>
+          <div class="userinfo_userlank_infomation no">
+            <% user = User.find(user_id)%>
+            <% if user.image?%>
+              <img src=<%= user.image %> class = "icon-image-lank no-icon-image">
+            <%else%>
+              <image src="/assets/default.jpg" class="icon-image-lank no-icon-image no-icon-image" alt="ユーザーアイコン" %>
+            <% end %>
+            <%= user.username%>
+          </div>
+        <% end%>
+      </div>
+      <%end%>
+      <% @lank += 1%>
+    <%end%>
+  </div>
+  <div class="container">
+    <div class="post">
+      <%= link_to("/users/#{@post.user_id}", class:"no-underline") do%>
+      <div class="post_top">
+        <div class="userinfo">
+          <% if User.find_by(id: @post.user_id).image?%>
+            <img src=<%= User.find_by(id: @post.user_id).image %> class = "icon_img">
+          <%else%>
+            <image src="/assets/default.jpg" class="icon_img" alt="ユーザーアイコン" %>
+          <% end %>
+          <div class="username">
+            <%= @post.user.username%>
+          </div>
+        </div>
+        <div class="post_body">
+          <%= simple_format(@post.body)%>
+        </div>
+        <div class="post_img">
+          <%if Post.find(@post.id).img?%>
+            <img src=<%= Post.find(@post.id).img %> class="img">
+          <%end%>
+        </div>
+      </div>
+      <%end%>
+      <div class="post_bottom">
+        <% if current_user == User.find_by(id: @post.user_id)%>
+          <%= link_to(post_path(@post.id),method: :delete, :class=>"no-underline",
+          data: { confirm: '削除しますか?' }) do %>
+            この豆知識を消す
+          <%end%>
+        <%end%>
+        <% case @post.category %>
+        <% when "食べ物"%>
+          <div class="category_each">
+            <i class="fas fa-apple-alt"></i>
+            <%= @post.category%>
+          </div>
+        <% when "洋服"%>
+          <div class="category_each">
+            <i class="fas fa-tshirt"></i>
+            <%= @post.category%>
+          </div>
+        <% when "美容"%>
+          <div class="category_each">
+            <i class="fas fa-cut"></i>
+            <%= @post.category%>
+          </div>
+        <% when "医療"%>
+          <div class="category_each">
+            <i class="fas fa-hand-holding-medical"></i>
+            <%= @post.category%>
+          </div>
+        <% when "勉強"%>
+          <div class="category_each">
+            <i class="fas fa-user-graduate"></i>
+            <%= @post.category%>
+          </div>
+        <% when "スポーツ"%>
+          <div class="category_each">
+            <i class="fas fa-running"></i>
+            <%= @post.category%>
+          </div>
+        <% when "ゲーム"%>
+          <div class="category_each">
+            <i class="fab fa-playstation"></i>
+            <%= @post.category%>
+          </div>
+        <% when "保険"%>
+          <div class="category_each">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <%= @post.category%>
+          </div>
+        <% when "お金"%>
+          <div class="category_each">
+            <i class="fas fa-comment-dollar"></i>
+            <%= @post.category%>
+          </div>
+        <% when "その他"%>
+          <div class="category_each">
+            <i class="fab fa-accusoft"></i>
+            <%= @post.category%>
+          </div>
+        <% end %>
+        <div class="good">
+          <% if Like.find_by(user_id: current_user.id, post_id: @post.id)%>
+            <%= link_to({controller: "likes", action: "destroy", post_id: @post.id}, method: :delete, :class=>"no-underline") do%>
+            <i class="fab fa-angellist my-fab"></i>
+            <%end%>
+          <%else%>
+            <%= link_to({controller: "likes", action: "create", post_id: @post.id}, method: :post, :class => "no-underline") do%>
+            <i class="fab fa-angellist"></i>
+            <%end%>
+          <%end%>
+          <%= @likes_count%>
+        </div>
+        <div class="comment">
+          <%= link_to({controller: "comments", action: :new, post_id: @post.id, method: :get, :class => "no-underline"}) do%>
+          <i class="far fa-comment-dots"></i>
+          <%= Comment.where(post_id: @post.id).count%>
+          <%end%>
+        </div>
+        <div class="time">
+          <%= @post.created_at%>
+        </div>
+      </div>
+    </div>
+    <h2>コメント欄</h2>
+    <div class="post_comments">
+      <% if @comments%>
+        <% @comments.each do |comment|%>
+          <div class="post">
+            <div class="post_top">
+              <div class="userinfo">
+                <% if User.find_by(id: comment.from_user_id).image?%>
+                  <img src=<%= User.find_by(id: comment.from_user_id).image %> class = "icon_img">
+                <%else%>
+                  <image src="/assets/default.jpg" class="icon_img" alt="ユーザーアイコン" %>
+                <% end %>
+                <div class="username">
+                  <%= @post.user.username%>
+                </div>
+              </div>
+              <div class="post_body">
+                <%= simple_format comment.body%>
+              </div>
+            </div>
+            <!-- #### -->
+            <div class="post_bottom">
+              <%= comment.created_at%>
+            </div>
+          </div>
+          <%end%>
+        <%end%>
+    </div>
+  </div>
+  <div class="categorylank">
+    <label class="label-categorylank">人気カテゴリー順</label>
+    <% @category.each do |c,p| %>
+      <% case c %>
+      <% when "食べ物"%>
+        <%= link_to("/posts/1/category",class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fas fa-apple-alt"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% when "洋服"%>
+        <%= link_to("/posts/2/category",class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fas fa-tshirt"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% when "美容"%>
+        <%= link_to("/posts/3/category", class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fas fa-cut"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% when "医療"%>
+        <%= link_to("/posts/4/category", class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fas fa-hand-holding-medical"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% when "勉強"%>
+        <%= link_to("/posts/5/category", class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fas fa-user-graduate"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% when "スポーツ"%>
+        <%= link_to("/posts/6/category", class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fas fa-running"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% when "ゲーム"%>
+        <%= link_to("/posts/7/category", class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fab fa-playstation"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% when "保険"%>
+        <%= link_to("/posts/8/category", class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fas fa-file-invoice-dollar"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% when "お金"%>
+        <%= link_to("/posts/9/category", class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fas fa-comment-dollar"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% when "その他"%>
+        <%= link_to("/posts/10/category", class:"no-underline") do %>
+        <div class="category_each">
+          <i class="fab fa-accusoft"></i>
+          <%= c%>
+        </div>
+        <%end%>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,386 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.submit{
+  background-color: rgba(0,0,0,0.7);
+}
+
+
+.text_area_comment{
+  height: 200px;
+}
+
+
+//スマホ、タブレット向け
+//スマホ、タブレット向け
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+.main_posts_index,.main_posts_category{
+  background-color: rgba(0,0,0,0.7);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  z-index: 0;
+  display: flex;
+  .userlank{
+    position: absolute;
+    top: 100px;
+    left:0;
+    width: 25%;
+    height: 650px;
+    font-size: 1.2rem;
+    color: white;
+    overflow-y: scroll;
+      .label-lank{
+        padding-left: 10px;
+        font-weight: bold;
+      }
+
+      .no-underline{
+        text-decoration:none !important;
+        color: white;
+      }
+
+      .userinfo_userlank{
+        width: 100%;
+        margin: 5px 0;
+        display: flex;
+        transition: 0.3s;
+
+        .userinfo_userlank_lank{
+          width: 10%;
+          text-align: center;
+          margin: auto 0;
+        }//userinfo_userlank_lank
+
+        .userinfo_userlank_infomation{
+          width: 90%;
+
+          .icon-image-lank{
+            margin: 5px;
+            width: 70px;
+            height: 70px;
+            //サイズ指定
+            border-radius: 100px;
+            //画像を丸くする
+            object-fit: cover;
+            //タテヨコ比を変えないままトリミング
+          }//icon-image-lank
+          .no-icon-image{
+            width: 30px;
+            height: 30px;
+          }//no-icon-image
+          .no2-icon-image{
+            width: 60px;
+            height: 60px;
+          }//no2-icon-image
+          .no3-icon-image{
+            width: 50px;
+            height: 50px;
+          }//no3-icon-image
+
+        }//userinfo_userlank_infomation
+        .no1{
+          font-weight: bold;
+          font-size: 1.8rem;
+          line-height: 1.6rem;
+        }//no1
+        .no2{
+          font-weight: bold;
+          font-size: 1.4rem;
+        }//no2
+        .no3{
+          font-weight: bold;
+          font-size: 1.0rem;
+        }//no3
+        .no{
+          font-size: 0.8rem;
+        }
+      }//userinfo_userlank
+      .userinfo_userlank:hover{
+        // background-color: rgba(0,0,0,0.7);
+        color: blue;
+      }//userinfo_userlank:hover
+    @include pc{
+      display: none;
+    }
+    @include tab{
+      display: none;
+    };
+    @include sp{
+      display: none;
+    };
+  }//userlank
+  .container{
+    position: absolute;
+    top: 140px;
+    left: 25%;
+    width: 50%;
+    height: 80vh;
+    overflow-y: scroll;
+    margin: 0 auto;
+    display: block;
+    @include pc{
+      position: absolute;
+      top: 160px;
+      left: 25px;
+      width: 100%;
+      height: 85vh;
+    }
+    @include tab{
+      position: absolute;
+      top: 120px;
+      left: 0;
+      width: 100%;
+      height: 85vh;
+    };
+    @include sp{
+      position: absolute;
+      top: 120px;
+      left: 0;
+      width: 100%;
+      height: 80vh;
+    };
+    h2{
+      padding-top: 10px;
+      color: white;
+      font-weight: bold;
+    }
+    .post{
+      display: block;
+      vertical-align: middle;
+      padding: 10px;
+      color: white;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,1.0);
+      font-size: 1.2rem;
+      transition: 0.3s;
+      @include tab{
+        font-size: 1.0rem;
+      }
+      @include sp{
+        font-size: 1.0rem;
+      }
+      h2{
+        font-weight: bold;
+        padding: 10px 0;
+      }
+      .text_area{
+        background-color: rgba(0,0,0,0.3);
+        color: white;
+        width: 100%;
+        height: 450px;
+        @include pc{
+          height: 65vh;
+        }
+        @include tab{
+          height: 60vh;
+        }
+        @include sp{
+          height: 55vh;
+        }
+      }//text_area
+      .image{
+        @include pc{
+          background-color: rgba(255,255,255,1);
+          width: 30%;
+          border-radius: 5px;
+        }
+        @include tab{
+          width: 40%;
+        }
+        @include sp{
+          width: 40%;
+        }
+      }//image
+      #category{
+        background-color: white;
+        padding-bottom: 5px;
+      }//category
+      .action{
+        text-align: center;
+        .action-child{
+          font-weight: bold;
+          color: white;
+          background-color: rgba(222,222,222,0.3);
+          border: 2px solid white;
+          border-radius: 5px;
+          margin: 10px auto;
+          padding: 5px 20px;
+          transition: 0.3s;
+        }//action-child
+        .action-child:hover{
+          background-color: black;
+          transform: scale(1.2);
+        }//action-child:hover
+      }//action
+      .no-underline{
+        text-decoration:none !important;
+        color: white;
+        transition: 0.3s;
+      }//no-underline
+      .post_top{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        .userinfo{
+          display: flex;
+          height: 80px;
+          .icon_img{
+            margin: 5px;
+            width: 70px;
+            height: 70px;
+            //サイズ指定
+            border-radius: 100px;
+            //画像を丸くする
+            object-fit: cover;
+            //タテヨコ比を変えないままトリミング
+          }//icon_img
+          .username{
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            white-space: nowrap;
+            font-weight: bold;
+            line-height: 80px;
+          }//username
+        }//userinfo
+        .post_body{
+          width: 100%;
+          padding-left: 80px;
+        }//post_body
+        .post_img{
+          width: 50%;
+          margin: 0 auto;
+          text-align: center;
+          //投稿に載せる用の写真
+          .img{
+            margin-top: 5px;
+            width: 100%;
+            height: 70%; //サイズ指定
+            object-fit: cover; //タテヨコ比を変えないままトリミング
+          }//img
+        }
+      }//post_top
+      .post_bottom{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+        padding-right: 10px;
+        font-size: 1.0rem;
+        @include tab{
+          display: flex;
+          padding-right: 0px;
+          justify-content: flex-end;
+          font-size: 1.0rem;
+        }
+        @include sp{
+          display: flex;
+          padding-right: 0px;
+          justify-content: flex-end;
+          font-size: 1.0rem;
+        }
+        .category_each{
+          margin-right: 20px;
+          padding-top: 2px;
+          transition: 0.3s;
+        }//category_each
+        .good{
+          margin-right: 10px;
+          font-size: 1.2rem;
+          .my-fab{
+            color: green;
+          }//my-fab
+        }//good
+        .good:last-child{
+          @include tab{
+            margin-right: 10px;
+            margin-top: -10px;
+            font-size: 1.0rem;
+          }
+          @include sp{
+            margin-right: 10px;
+            margin-top: -3px;
+            font-size: 1.0rem;
+          }
+        }//good:last-child
+        .comment{
+          margin-right: 10px;
+          font-size: 1.2rem;
+        }//comment
+        .time{
+        }//time
+      }//post_bottom
+    }//post
+    .post:hover{
+      background-color: rgba(0,0,0,0.6);
+    }//post:hover
+    .post_comments{
+      height: 450px;
+      overflow-y: scroll;
+      padding: 10px 0;
+      @include pc{
+        height: 900px;
+      }
+      @include tab{
+        height: 600px;
+      }
+      @include sp{
+        height: 450px;
+      }
+    }//post_comments
+  }//container
+  .categorylank{
+    position: absolute;
+    top:100px;
+    left: 75%;
+    padding: 0 10px;
+    width: 25%;
+    height: 650px;
+    font-size: 1.4rem;
+    color: white;
+    overflow-y: scroll;
+    display: block;
+    @include pc{
+      display: none;
+    }
+    .no-underline{
+      text-decoration:none !important;
+      color: white;
+    }
+    .label-categorylank{
+      font-weight: bold;
+      font-size: 1.2rem;
+    }//label-categorylank
+    .category_each{
+      margin: 10px 0;
+      transition: 0.3s;
+    }//category_each
+    .category_each:hover{
+      color: blue;
+      opacity: 0.9;
+    }//category_each:hover
+  }//categorylank
+}//main-posts-index
