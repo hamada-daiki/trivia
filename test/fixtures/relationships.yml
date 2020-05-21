@@ -4,8 +4,22 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+#follower
+one:
+  id: 4
+  user_id: 3
+  follow_id: 1
+  created_at: 2020-04-26 04:17
+  updated_at: 2020-04-26 04:17
 # column: value
-#
-two: {}
+#following
+two:
+  id: 7
+  user_id: 1
+  follow_id: 4
+
+three:
+  id: 8
+  user_id: 1
+  follow_id: 6
 # column: value

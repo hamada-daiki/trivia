@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only:[:show,:edit,:follower,:following]
   before_action :check_correct_user, only:[:edit]
+  before_action :authenticate_user!
 
   def index
     @users = User.all
